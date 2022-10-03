@@ -10,12 +10,14 @@ public class EmployeeWageComputation {
 		int wagePH = 20;
 		int FulldayH = 8;
 		int ParttimedayH = 4;
-		if(a == 1)
-		System.out.println("Employee is Present\nPer day Wage is: "+(wagePH*FulldayH));
-		else if(a == 2)
-		System.out.println("Employee is Present Halfday\nPer day Wage is: "+(wagePH*ParttimedayH));
-		else
-			System.out.println("Employee is Absent\nPer day Wage is: 0");
+		switch(a) {
+		case 0: System.out.println("Employee is Absent\nPer day Wage is: 0");
+		break;
+		case 1: System.out.println("Employee is Present\nPer day Wage is: "+(wagePH*FulldayH));
+		break;
+		case 2: System.out.println("Employee is Present Halfday\nPer day Wage is: "+(wagePH*ParttimedayH));
+		break;
+		}
 
 	}
 
