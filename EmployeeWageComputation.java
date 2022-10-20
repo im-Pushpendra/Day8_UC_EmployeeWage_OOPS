@@ -10,7 +10,7 @@ public class EmployeeWageComputation {
 	private final int empWagePerHour;
 	private final int workingHours;
 	private final int workingDays;
-
+	int totalSalary;
 	static Random random = new Random();
 
 	public EmployeeWageComputation(String companyName, int empWagePerHour, int workingHours, int workingDays) {
@@ -20,9 +20,9 @@ public class EmployeeWageComputation {
 		this.workingHours = workingHours;
 	}
 
-	public int calculateWage() {
+	public void calculateWage() {
 		int salary = 0;
-		int totalSalary = 0;
+		totalSalary = 0;
 		int totalWorkingHours = 0;
 		int days = 0;
 
@@ -50,23 +50,25 @@ public class EmployeeWageComputation {
 			
 			System.out.print("Day: "+days+"\t random: "+empCheck+"\t");
 			System.out.print("Working Hours: "+totalWorkingHours+"\t");
-			System.out.print("\tSalary is: "+salary+"\t");
+			System.out.print("Salary is: "+salary+"\t");
 			totalSalary = totalSalary + salary;
 			
 		}
+	}
+	public String toString() {
+		return "Total Wage for Company: "+companyName+" is "+totalSalary;
 		
-		return totalWorkingHours * empWagePerHour;
 	}
 	
 	public static void main(String[] args) {
 		System.out.println("Welcome to Employee Wage Computation Program");
 		
-		EmployeeWageComputation dmart = new EmployeeWageComputation("Dmart", 23, 90, 21);
-		EmployeeWageComputation walmart = new EmployeeWageComputation("Walmart", 24, 109, 22);
-		 
-		 
-		 System.out.println("Total employee's wage of Company: " + dmart.companyName + ": " + dmart.calculateWage());
-		 System.out.println("Total employee's wage of Company: " + walmart.companyName + ": " + walmart.calculateWage());
+		EmployeeWageComputation netflix = new EmployeeWageComputation("netflix", 23, 90, 21);
+		EmployeeWageComputation jio = new EmployeeWageComputation("jio", 24, 109, 22);
+		 netflix.calculateWage();
+		 System.out.println(netflix);
+		 jio.calculateWage();
+		 System.out.println(jio);
 
 	}
 
