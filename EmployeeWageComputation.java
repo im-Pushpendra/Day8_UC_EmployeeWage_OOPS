@@ -54,14 +54,15 @@ public class EmployeeWageComputation {
 			totalSalary = totalSalary + salary;
 			
 		}
+		
+		//return totalWorkingHours * empWagePerHour;
 	}
 	public String toString() {
 		return "Total Wage for Company: "+companyName+" is "+totalSalary;
 		
 	}
-	
+
 	public static void main(String[] args) {
-		System.out.println("Welcome to Employee Wage Computation Program");
 		
 		EmployeeWageComputation netflix = new EmployeeWageComputation("netflix", 23, 90, 21);
 		EmployeeWageComputation jio = new EmployeeWageComputation("jio", 24, 109, 22);
@@ -69,7 +70,11 @@ public class EmployeeWageComputation {
 		 System.out.println(netflix);
 		 jio.calculateWage();
 		 System.out.println(jio);
-
+		 
+		 //System.out.println("Total employee's wage of Company: " + dmart.companyName + ": " + dmart.calculateWage());
+		 //System.out.println("Total employee's wage of Company: " + walmart.companyName + ": " + walmart.calculateWage());
+		
+		
 	}
 
 }
