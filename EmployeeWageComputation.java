@@ -79,6 +79,16 @@ public class EmployeeWageComputation implements IEmployeeWage{
 			return totalHrs * wagePerHr;
 		}
 
+		public void getTotalWage(String companyName) {
+			for (CompanyEmpWage cmp : this.companyEmpWageList) {
+				if (cmp.getCompanyName() == companyName) {
+					System.out.println(cmp.getCompanyName() + " : " + cmp.getTotalEmpWage());
+					return;
+				}
+			}
+			System.out.println(companyName + " not found!");
+		}
+
 		public static void main(String[] args) {
 			System.out.println("Welcome to Employee Wage Computation Program");
 
@@ -88,11 +98,9 @@ public class EmployeeWageComputation implements IEmployeeWage{
 			employeeWage.addCompany("TCS", 18, 50, 30);
 			employeeWage.addCompany("TATA", 12, 30, 10);
 
-			for (CompanyEmpWage cmp : employeeWage.companyEmpWageList) {
-				System.out.println(cmp.getCompanyName() + " : " + cmp.getTotalEmpWage());
-				System.out.print(cmp.getDailyWages());
-				System.out.println();
-			}
+			employeeWage.getTotalWage("TCS");
+			employeeWage.getTotalWage("Jio");
+			employeeWage.getTotalWage("Amazon");
 
 		}
 }
