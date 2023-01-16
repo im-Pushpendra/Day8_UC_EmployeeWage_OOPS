@@ -1,80 +1,90 @@
 package com.bridgelabz.day8.UC_EmployeeWage_OOPS;
 
-import java.util.*;
 public class EmployeeWageComputation {
 	
-	public static final int halfDayHours = 4;
-	public static final int fullDayHours = 8;
+	public static final int IS_FULLTIME = 1;
+	public static final int IS_PARTTIME = 2;
+	private int numOfCompany = 0;
+	private CompanyEmpWage[] companyEmpWages;
 
-	private final String companyName;
-	private final int empWagePerHour;
-	private final int workingHours;
-	private final int workingDays;
-	int totalSalary;
-	static Random random = new Random();
-
-	public EmployeeWageComputation(String companyName, int empWagePerHour, int workingHours, int workingDays) {
-		this.companyName = companyName;
-		this.empWagePerHour = empWagePerHour;
-		this.workingDays = workingDays;
-		this.workingHours = workingHours;
+	public EmployeeWageComputation() {
+		companyEmpWages = new CompanyEmpWage[10];
 	}
 
-	public void calculateWage() {
-		int salary = 0;
-		totalSalary = 0;
-		int totalWorkingHours = 0;
+	public void addCompany(String companyName, int wagePerHr, int totalWorkingDays, int totalWorkingHrs) {
+		CompanyEmpWage companyEmpWage = new CompanyEmpWage(companyName, wagePerHr, totalWorkingDays, totalWorkingHrs);
+		companyEmpWage.setTotalEmpWage(computeEmployeeWage(wagePerHr, totalWorkingDays, totalWorkingHrs));
+		companyEmpWages[numOfCompany] = companyEmpWage;
+		numOfCompany++;
+	}
+
+	public int computeEmployeeWage(int wagePerHr, int totalWorkingDays, int totalWorkingHrs) {
+
+	private String companyName;
+	private int wagePerHr;
+	private int totalWorkingDays;
+	private int totalWorkingHrs;
+
+	public EmployeeWageComputation(String companyName, int wagePerHr, int totalWorkingDays, int totalWorkingHrs) {
+		this.companyName = companyName;
+		this.wagePerHr = wagePerHr;
+		this.totalWorkingDays = totalWorkingDays;
+		this.totalWorkingHrs = totalWorkingHrs;
+	}
+
+	public int computeEmployeeWage() {
+		int fullTimeHrs = 8;
+		int partTimeHrs = 4;
+		int totalHrs = 0;
 		int days = 0;
-
-		while (totalWorkingHours <= workingHours && days <= workingDays) {
+		while (totalHrs < totalWorkingHrs && days < totalWorkingDays) {
 			days++;
-
-			int empCheck = random.nextInt(3);
-
-			switch (empCheck) {
-			case 1:
-				
-				 System.out.println("Present Fullday.");
-				 salary = empWagePerHour * fullDayHours;
-				 totalWorkingHours = totalWorkingHours + fullDayHours;
+			int isPresent = (int) Math.floor(Math.random() * 10) % 3;
+			switch (isPresent) {
+			case IS_FULLTIME:
+				totalHrs += fullTimeHrs;
 				break;
-			case 2:
-				
-				 System.out.println("Present HalfDay.");
-				 salary = empWagePerHour * halfDayHours;
-				 totalWorkingHours = totalWorkingHours + halfDayHours;
+			case IS_PARTTIME:
+				totalHrs += partTimeHrs;
 				break;
 			default:
-				System.out.println("Employee Abscent");
+				totalHrs += 0;
 			}
-			
-			System.out.print("Day: "+days+"\t random: "+empCheck+"\t");
-			System.out.print("Working Hours: "+totalWorkingHours+"\t");
-			System.out.print("Salary is: "+salary+"\t");
-			totalSalary = totalSalary + salary;
-			
 		}
-		
-		//return totalWorkingHours * empWagePerHour;
-	}
-	public String toString() {
-		return "Total Wage for Company: "+companyName+" is "+totalSalary;
-		
+
+		while (totalHrs < totalWorkingHrs && days < totalWorkingDays) {
+			days++;
+
+			int isPresent = (int) Math.floor(Math.random() * 10) % 3;
+			switch (isPresent) {
+			case 1:
+				totalHrs += fullTimeHrs;
+				break;
+			case 2:
+				totalHrs += partTimeHrs;
+				break;
+			default:
+				totalHrs += 0;
+
+			}
+		}
+		return totalHrs * wagePerHr;
 	}
 
 	public static void main(String[] args) {
-		
-		EmployeeWageComputation netflix = new EmployeeWageComputation("netflix", 23, 90, 21);
-		EmployeeWageComputation jio = new EmployeeWageComputation("jio", 24, 109, 22);
-		 netflix.calculateWage();
-		 System.out.println(netflix);
-		 jio.calculateWage();
-		 System.out.println(jio);
-		 
-		 //System.out.println("Total employee's wage of Company: " + dmart.companyName + ": " + dmart.calculateWage());
-		 //System.out.println("Total employee's wage of Company: " + walmart.companyName + ": " + walmart.calculateWage());
-		
-		
-	}
 
+		System.out.println("Welcome to Employee Wage Computation Program");
+
+		EmployeeWageComputation employeeWage = new EmployeeWageComputation();
+		employeeWage.addCompany("WIPRO", 8, 8, 30);
+		employeeWage.addCompany("BRIDGELABZ", 12, 8, 40);
+		employeeWage.addCompany("TCS", 18, 50, 30);
+		employeeWage.addCompany("TATA", 12, 30, 10);
+
+		for (int i = 0; i < employeeWage.numOfCompany; i++) {
+			System.out.println(employeeWage.companyEmpWages[i].getCompanyName() + " : "
+					+ employeeWage.companyEmpWages[i].getTotalEmpWage());
+		}
+
+	}
 }
